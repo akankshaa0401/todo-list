@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+formFormatDesignToRight {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: right
+}
+input.ng-invalid.ng-touched {
+    border: 1px solid red;
+}
+
+select.ng-invalid.ng-touched {
+    border: 1px solid red;
+    color: red;
+}
