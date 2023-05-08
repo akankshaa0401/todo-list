@@ -1,3 +1,7 @@
 .container-fluid{
     margin-right: 10px;
 }
+.navbar-brand {
+    font-size: 20px;
+    font-family: Tahoma, Arial, sans-serif
+}

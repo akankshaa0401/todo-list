@@ -9,20 +9,21 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class SignupService {
-  
-private handleError(error: HttpErrorResponse) {
-  if (error.status === 0) {
-    // A client-side or network error occurred. Handle it accordingly.
-    console.error('An error occurred:', error.error);
-  } else {
-    // The backend returned an unsuccessful response code.
-    // The response body may contain clues as to what went wrong.
-    console.error(
-      `Backend returned code ${error.status}, body was: `, error.error);
+  errorMessage:string;
+
+  private handleError(errorRes: HttpErrorResponse) {
+    console.log('handleerror');
+    this.errorMessage = 'An unknown error occurred!';
+    if (!errorRes.error || !errorRes.error.error) {
+      return throwError(this.errorMessage);
+    }else{
+     return this.errorMessage=errorRes.error.message
+    }
+    
+    return throwError(this.errorMessage);
+    
   }
-  // Return an observable with a user-facing error message.
-  return throwError(() => new Error('Something bad happened; please try again later.'));
-}
+
 //   private apiUrl = 'http://localhost:50444/api'; // Replace with your API endpoint URL
 
   constructor(private http: HttpClient,private router:Router) { }
@@ -38,9 +39,9 @@ signup(
     email: string,
      password: string,
      confirmPass:string,
-     birthdate:any,
      gender:string,
      name:string,
+     birthdate?:any,
      photo?:File){
     
     console.log("signup function")
@@ -59,7 +60,8 @@ signup(
         alert('You successfully signed up');
         this.router.navigate(["login"])
       },err=>{
-        alert("Something went wrong")
+        console.log(err);
+        this.handleError(err);
       })
   }
 

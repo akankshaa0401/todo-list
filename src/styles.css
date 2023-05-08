@@ -13,3 +13,6 @@ select.ng-invalid.ng-touched {
     border: 1px solid red;
     color: red;
 }
+.text-muted{
+    color:#FF8A8A
+}

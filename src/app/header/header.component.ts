@@ -4,16 +4,18 @@ import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
+import { LoginService } from '../login/login.service';
+import { AuthService } from '../auth.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  isAuthenticated = false;
+  isAuthenticated = this.authService.isUserLoggedIn;
   private userSub: Subscription;
 
-  constructor(private cookieService: CookieService,private router:Router,private http:HttpClient
+  constructor(public authService:AuthService,private cookieService: CookieService,private router:Router,private http:HttpClient
   ) {}
 
   ngOnInit() {
@@ -21,26 +23,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onLogout(){
-    if (this.cookieService.check('email') && this.cookieService.check('password')){
-      this.cookieService.delete('email');
-      this.cookieService.delete('password');
-    return this.http.post(
-      environment.APIKey + 'api/v1/users/logout'
-      ,{ responseType: 'text' }
+    
+    this.authService.logout().subscribe(res=>{
+      console.log(res);
       
-    ).subscribe(res=>{
-      alert('You have been logged out successfully');
-      this.router.navigate(['/signup'])
+      // alert('You have been logged out successfully');
+      this.router.navigate(['login'])
       // this.router.navigate(['']);
     },err=>{
       alert("OOPS!! Something went wrong")
     })
   }
-  else{
-    alert("OOPS!! Not able to logout")
-  }
-  return true
-  }
+  
   ngOnDestroy() {
     
   }

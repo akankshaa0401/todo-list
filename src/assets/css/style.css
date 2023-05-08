@@ -7,13 +7,28 @@
   font-family: "Roboto", sans-serif;
 }
 
-body {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
+html {
+  overflow: hidden;
+}
+input.ng-pristine.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
 
+select.ng-pristine.ng-invalid.ng-touched {
+  border: 1px solid red;
+  color: red;
+}
+/* body {
+  height: 100vh;
+  padding: 10px;
+  margin-top: 100px;
+
+} */
+
+a {
+  color: #fb771a;
+  text-decoration: none;
+  background-color: transparent;
 }
 
 ::placeholder {
@@ -22,8 +37,18 @@ body {
 
 }
 
-.container {
+.main-class {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-class .container {
   max-width: 700px;
+}
+
+.container {
+  max-width: 500px;
   width: 100%;
   background-color: #fff;
   padding: 25px 30px;
@@ -36,8 +61,6 @@ body {
   position: relative;
   font-weight: 500;
 }
-
-
 
 .content form .user-details {
   display: flex;
@@ -57,12 +80,12 @@ form .input-box span.details {
 }
 
 .user-details .input-box input {
-  height: 45px;
+
   width: 100%;
   outline: none;
   font-size: 16px;
   border-radius: 5px;
-  padding-left: 15px;
+  padding: 12px;
   border: 1px solid #ced4da;
   transition: all 0.3s ease;
 }
@@ -100,25 +123,104 @@ form .category label .dot {
   transition: all 0.3s ease;
 }
 
-#dot-1:checked~.category label .one,
-#dot-2:checked~.category label .two,
-#dot-3:checked~.category label .three {
-  background: #9b59b6;
-  border-color: #d9d9d9;
-}
+
+
 
 form input[type="radio"] {
   display: none;
 }
 
-form .button {
-  height: 45px;
-  margin: 20px 0 10px;
-
+.control {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  font-size: 14px;
 }
 
-form .button input {
-  height: 100%;
+.control .caption {
+  position: relative;
+  top: .2rem;
+}
+
+.control input {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+.control__indicator {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background: #e6e6e6;
+  border-radius: 4px;
+}
+
+.control--radio .control__indicator {
+  border-radius: 50%;
+}
+
+.control:hover input~.control__indicator,
+.control input:focus~.control__indicator {
+  background: #ccc;
+}
+
+.control input:checked~.control__indicator {
+  background: #fb771a;
+}
+
+.control:hover input:not([disabled]):checked~.control__indicator,
+.control input:checked:focus~.control__indicator {
+  background: #fb8633;
+}
+
+.control input:disabled~.control__indicator {
+  background: #e6e6e6;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.control__indicator:after {
+  font-family: 'icomoon';
+  content: '\e5ca';
+  position: absolute;
+  display: none;
+  font-size: 16px;
+  -webkit-transition: .3s all ease;
+  -o-transition: .3s all ease;
+  transition: .3s all ease;
+}
+
+.control input:checked~.control__indicator:after {
+  display: block;
+  color: #fff;
+}
+
+.control--checkbox .control__indicator:after {
+  top: 50%;
+  left: 50%;
+  margin-top: -1px;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.control--checkbox input:disabled~.control__indicator:after {
+  border-color: #7b7b7b;
+}
+
+.control--checkbox input:disabled:checked~.control__indicator {
+  background-color: #7e0cf5;
+  opacity: .2;
+}
+
+.button {
+  height: 45px;
+  margin: 20px 0 10px;
   width: 100%;
   border-radius: 5px;
   border: 1px solid #ced4da;
@@ -129,30 +231,30 @@ form .button input {
   cursor: pointer;
   transition: all 0.3s ease;
   background: #fb771a;
+
 }
 
-form .button input:hover {
+form .button:hover {
 
   background-color: #eb6304;
   border-color: #de5e04;
 }
 
 /*---upload image---- */
-label {
-  display: inline-block;
+.upload-img {
+  padding: 8px;
   background-color: #fb771a;
-  color: white;
-  padding: 0.5rem;
-  font-family: sans-serif;
-  border-radius: 0.3rem;
-  cursor: pointer;
-  margin-top: 1rem;
+  color: #ffff;
+  border-radius: 10px;
 }
 
 /* svg */
 .bi-image {
   margin-left: 5px;
+  display: inline-block;
+  vertical-align: middle;
 }
+
 
 /* file-text */
 
@@ -162,6 +264,32 @@ label {
 }
 
 
+/*------Todo styles------ */
+.nav {
+  position: relative;
+  height: 100vh;
+  overflow: auto;
+  width: 260px;
+
+}
+
+#sidebar {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  width: 280px;
+  height: 100%;
+  z-index: 100%;
+  background-color: red;
+}
+
+.banner-content {
+  position: absolute;
+  width: 423px;
+  height: 22px;
+  left: 266px;
+  top: 88px;
+}
 
 @media(max-width: 584px) {
   .container {
@@ -172,7 +300,14 @@ label {
     margin-bottom: 15px;
     width: 100%;
   }
-
+  input.ng-invalid.ng-touched {
+    border: 1px solid red;
+  }
+  
+  select.ng-invalid.ng-touched {
+    border: 1px solid red;
+    color: red;
+  }
   form .category {
     width: 100%;
   }
@@ -190,5 +325,13 @@ label {
 @media(max-width: 459px) {
   .container .content .category {
     flex-direction: column;
+  }
+  input.ng-invalid.ng-touched {
+    border: 1px solid red;
+  }
+  
+  select.ng-invalid.ng-touched {
+    border: 1px solid red;
+    color: red;
   }
 }

@@ -1,207 +1,136 @@
-<div class="container">
-    <h3 class="title text-center">Registration</h3>
-    <div class="content">
+<div class="main-class">
+    <div class="container">
+      <h3 class="title text-center">Registration</h3>
+      <div class="content">
+       
         <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-            <div class="user-details">
-                <div class="input-box">
-                    <span class="details">Full Name</span>
-                    <input type="text" formControlName="name" placeholder="Enter
-                        your name" required>
-                    <small class="form-text text-muted"
-                        *ngIf="(signupForm.controls.name.touched ||
-                        submitted===true) &&
-                        signupForm.controls.name.errors?.required">
-                        Please enter Name!
-                    </small>
-                </div>
-                <div class="input-box">
-                    <span class="details">Birth Date</span>
-                    <input type="date" formControlName="birthdate"
-                        placeholder="Enter your birthdate" required>
-                    <small class="form-text text-muted"
-                        *ngIf="signupForm.controls.birthdate.errors?.['dateMatch']">
-                        Please do not select future date!
-                    </small>
-                </div>
-                <div class="input-box">
-                    <span class="details">Email</span>
-                    <input type="text" formControlName="email"
-                        placeholder="Enter your email" required>
-                    <small class="form-text text-muted"
-                        *ngIf="(signupForm.controls.email.touched ||
-                        submitted===true) &&
-                        signupForm.controls.email.errors?.required">
-                        Please enter email address.!
-                    </small>
+          <div class="user-details">
+            <div class="input-box">
+              <label class="details">Full Name</label>
+              <input type="text" formControlName="name" placeholder="Enter your name" required>
+              <medium class="form-text text-muted"
+              *ngIf="(signupForm.controls.name.touched ||
+              submitted===true) &&
+              signupForm.controls.name.errors?.required">
+              Please enter Name!
+            </medium>
+            </div>
+            <div class="input-box">
+              <label class="details">Birth date</label>
+              <input type="date" formControlName="birthdate" placeholder="Enter your Birthdate">
+          <medium class="errorDisplay"
+              *ngIf="signupForm.controls.birthdate.errors?.['dateMatch']">
+              Your minimum age should be 10
+          </medium>
+            </div>
+            <div class="input-box">
+                <span class="details">Email</span>
+                <input type="email" formControlName="email"
+                    placeholder="Enter your email" required>
+                <medium class="form-text text-muted"
+                    *ngIf="(signupForm.controls.email.touched ||
+                    submitted===true) &&
+                    signupForm.controls.email.errors?.required">
+                    Please enter email address.!
+                </medium>
 
-                    <small class="form-text text-muted"
-                        *ngIf="(signupForm.controls.email.touched ||
+                <medium class="form-text text-muted"
+                    *ngIf="(signupForm.controls.email.touched ||
+                    submitted===true) &&
+                    signupForm.controls.email.errors?.email">
+                    Email address not well formed.!
+                </medium>
+            </div>
+            <div class="input-box">
+              <label class="details">Gender</label>
+              <select id="gender"
+                      formControlName="gender"
+                      placeholder="Select">
+                      <option value="" disabled>select</option>
+                      <option *ngFor="let selectedGender of gender" [value]="selectedGender">
+                        {{selectedGender}}
+                      </option>
+                    </select>
+                    <medium class="form-text text-muted"
+                        *ngIf="(signupForm.controls.gender.touched ||
                         submitted===true) &&
-                        signupForm.controls.email.errors?.email">
-                        Email address not well formed.!
-                    </small>
-                </div>
-                <div class="input-box">
-                    <span class="details">Gender</span>
-                    <input type="text" formControlName="gender"
-                        placeholder="Enter your Gender" required>
-                </div>
-                <div class="input-box">
-                    <span class="details">Password</span>
-                    <input type="text" formControlName="password"
+                        signupForm.controls.gender.errors?.required">
+                        Please choose your gender
+                    </medium>
+            </div>
+            <div class="input-box">
+              <label class="details">Password</label>
+                    <input type="password" formControlName="password"
                         placeholder="Enter your password" required>
-                    <small class="form-text text-muted"
+                    <medium class="form-text text-muted"
                         *ngIf="signupForm.controls.password.errors?.['minlength']
                         ||
                         signupForm.controls.password.errors?.['maxlength']">
-                        Please enter 8 digits
-                    </small>
+                        Please enter password of length 8 to 12
+                    </medium>
 
-                    <small class="form-text text-muted"
+                    <medium class="form-text text-muted"
                         *ngIf="signupForm.controls.password.errors?.['required']
                         &&(signupForm.controls.password.touched ||
-                        submitted===true)">
+                        this.submitted)">
                         Password is required!
-                    </small>
-                </div>
-                <div class="input-box">
-                    <span class="details">Confirm Password</span>
-                    <input type="text" formControlName="confirmPass"
+                    </medium>
+            </div>
+            <div class="input-box">
+              <label class="details">Confirm Password</label>
+              <input type="password" formControlName="confirmPass"
                         placeholder="Confirm your password" required>
-                    <small class="form-text text-muted"
+                    <medium class="form-text text-muted"
                         *ngIf="signupForm.value.confirmPass !==
                         signupForm.value.password
                         && signupForm.value.confirmPass!=='' ">
                         Please match password
-                    </small>
+                    </medium>
 
-                    <small class="form-text text-muted"
+                    <medium class="form-text text-muted"
                         *ngIf="signupForm.controls.confirmPass.errors?.['required']
                         &&(signupForm.controls.confirmPass.touched ||
-                        submitted===true) && signupForm.value.password!==''">
+                        this.submitted) && signupForm.value.password!==''">
                         Confirm Password is required!
-                    </small>
-                    <small class="form-text text-muted"
+                    </medium>
+                    <medium class="form-text text-muted"
                         *ngIf="signupForm.value.password==='' &&
-                        signupForm.controls.confirmPass.touched">
-                        Please write password first!
-                    </small>
-                </div>
+                        (signupForm.controls.confirmPass.touched || this.submitted)">
+                        Please write your password first!
+                    </medium>
             </div>
+          </div>
 
-            <!-- Upload image -->
-            <input type="file" id="upload" hidden accept="image/*"
-                (change)="onFileSelected($event)"/>
-            <label for="upload">Upload Image<svg
-                    xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                    fill="currentColor" class="bi bi-image" viewBox="0 0 16 16">
-                    <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
-                        <path
-                            d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0
-                            0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1
-                            1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71
-                            3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0
-                            0 1 1-1h12z" />
-                        </svg> </label>
-                    <span *ngIf="this.file" class="file-text">
-                        {{this.file.name}}
-                    </span>
-                    <span *ngIf="!this.file" class="file-text">
-                        No File Choosen
-                    </span>
-                    <div class="button">
+          <!-- Upload image -->
 
-                        <input type="submit" [disabled]="!this.signupForm.valid"
-                            value="Register">
-                    </div>
-                    <p>Have an account ? <a routerLink="/login" 
-                            routerLinkActive="active">Login</a></p>
-                </form>
-            </div>
+          <input type="file" id="upload" hidden accept="image/*"
+          (change)="onFileSelected($event)"/>
+          
+          <label for="upload" class="upload-img">Upload Image<svg xmlns="http://www.w3.org/2000/svg" width="16"
+              height="16" fill="currentColor" class="bi bi-image" viewBox="0 0 16 16">
+              <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+              <path
+                d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z" />
+            </svg> </label> 
+            <span *ngIf="this.file" class="file-text">
+                {{this.file.name}}
+            </span>
+            <span *ngIf="!this.file" class="file-text">
+                No File Choosen
+            </span>
+            <medium class="form-text text-muted"
+            *ngIf="!this.filetype && this.fileSize">
+            Only jpeg/jpg/png allowed
+        </medium>
+        <br>
+        <div class="alert alert-danger" style="padding-top:2%;" *ngIf="this.error!=null">
+          <p>{{ this.error }}</p>
         </div>
-
-        <!-- <div class="container">
-    <div class="row">
-        <h5>Create Account</h5>
-        <div class="col-xs-12 col-md-6 col-md-offset-3">
-            <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-                <label>Email Address:</label>
-                <input type="email" id="email" formControlName="email" class="form-control" />
-                <small class="form-text text-muted"
-                    *ngIf="(signupForm.controls.email.touched || submitted===true) && signupForm.controls.email.errors?.required">
-                    Please enter email address.!
-                </small>
-
-                <small class="form-text text-muted"
-                    *ngIf="(signupForm.controls.email.touched || submitted===true) && signupForm.controls.email.errors?.email">
-                    Email address not well formed.!
-                </small>
-                <br>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <label>Name:</label>
-                        <input type="text" class="form-control" formControlName="name"/>
-                        <small class="form-text text-muted"
-                            *ngIf="(signupForm.controls.name.touched || submitted===true) && signupForm.controls.name.errors?.required">
-                            Please enter Name!
-                        </small>
-                    </div>
-                    <div class="col-sm-4">
-                        <label>Gender:</label>
-                       <input type="text" formControlName="gender" class="form-control">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="birthdate">BirthDate</label>
-                    <input type="date" class="form-control"
-                    formControlName="birthdate" />
-                    <small class="form-text text-muted" *ngIf="signupForm.controls.birthdate.errors?.['dateMatch']">
-                        Please do not select future date!
-                    </small>
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" formControlName="password" placeholder="Password">
-
-                    <small class="form-text text-muted" *ngIf="signupForm.controls.password.errors?.['minlength'] || 
-                signupForm.controls.password.errors?.['maxlength']">
-                        Please enter 8 digits
-                    </small>
-
-                    <small class="form-text text-muted" *ngIf="signupForm.controls.password.errors?.['required']
-                                    &&(signupForm.controls.password.touched || submitted===true)">
-                        Password is required!
-                    </small>
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword2">Confirm Password</label>
-                    <input type="password" class="form-control" formControlName="confirmPass" placeholder="Password">
-                
-                    <small class="form-text text-muted" *ngIf="signupForm.value.confirmPass !== signupForm.value.password
-                     && signupForm.value.confirmPass!=='' ">
-                        Please match password
-                    </small>
-                
-                    <small class="form-text text-muted" *ngIf="signupForm.controls.confirmPass.errors?.['required']
-                                                    &&(signupForm.controls.confirmPass.touched || submitted===true) && signupForm.value.password!==''">
-                       Confirm Password is required!
-                    </small>
-                    <small class="form-text text-muted" *ngIf="signupForm.value.password==='' && signupForm.controls.confirmPass.touched">
-                        Please write password first!
-                    </small>
-                </div>
-                <div class="row">
-                <label class="image-upload-container btn btn-bwm">
-                    <span>Select Image</span>
-                    <input #imageInput type="file" accept="image/*" (change)="onFileSelected($event)"
-                     name="photo" class="form-control">
-                </label>
-                </div>
-                <br>
-                <button type="submit" class="btn btn-primary" [disabled]="!this.signupForm.valid">Signup</button>
-                Already have an account 
-            <a routerLink="/login" class="nav-link" routerLinkActive="active">Login</a>
-            </form>
-        </div>
+          <button class="button" type="submit">Sign Up</button>
+          <p>Have an account ? <a routerLink="/login" 
+            routerLinkActive="active">Login</a></p>
+        </form>
+      </div>
     </div>
-</div> -->
+  </div>
+

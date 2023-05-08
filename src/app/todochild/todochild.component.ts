@@ -8,6 +8,7 @@ import { priorities } from '../const.variables';
 import { status } from '../const.variables';
 import { Router } from '@angular/router';
 import { CreatetaskService } from './createTask.service';
+import { UsersService } from '../users/users.service';
 @Component({
   selector: 'app-todochild',
   templateUrl: './todochild.component.html',
@@ -17,6 +18,7 @@ import { CreatetaskService } from './createTask.service';
 export class TodochildComponent {
   constructor(private createtask:CreatetaskService,
     private fb: FormBuilder,
+    private userService:UsersService,
     private router: Router) { }
   addTaskForm: FormGroup = new FormGroup({})
   priorities = priorities
@@ -33,15 +35,20 @@ export class TodochildComponent {
       dueDate: new FormControl('',),
     });
   }
-  onAddTask() {
-    console.log(this.clickedToAddTask);
-    this.clickedToAddTask
-    
-    
-  }
+  
+  // onclick(){
+  //   this.router.navigate(["users"])
+  // }
   onSubmit(){
     console.log(this.addTaskForm);
     this.createtask.createTask(this.addTaskForm.value.taskName,this.addTaskForm.value.priority)
-
+    .subscribe(res=>{
+      // this.cookieService.get('set-cookie')
+      // this.cookieService.set('connect.sid',email); 
+      alert('You successfully created Task');
+      this.router.navigate(["todolist"])
+    },err=>{
+      alert("Something went wrong while creating task")
+    })
   }
 }

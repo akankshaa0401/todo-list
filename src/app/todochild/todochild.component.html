@@ -1,47 +1,55 @@
-<app-header></app-header>
+<div class="container-fluid">
 <div class="row">
 
 <div class="col-sm-7">
 <div class="row">
     <div class="col">
-        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Add Task</button>
+        <button class="btn btn-success"  data-toggle="modal" data-target="#exampleModalCenter">Add Task</button>
     </div>
 </div>
+<!-- <div class="row">
+  <div class="col">
+      <button class="btn btn-success" (click)="onclick()">Get Users</button>
+  </div>
+</div> -->
 <br>
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable">
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <form [formGroup]="addTaskForm" (ngSubmit)="onSubmit()">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <h5 class="modal-title" id="exampleModalLongTitle">Add Task </h5>
+        <button type="button" class="close btn btn-secondary" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
         </div>
         <div class="modal-body">
            
-                <div class="row">
-                  <div class="col-sm-5">
-                      <input type="text" formControlName="taskName" class="form-control"/>
+                <div class="form-group">
+                      <input type="text" placeholder="Task Name" formControlName="taskName" class="form-control"/>
                   </div>
+            
+                <div class="form-group">
+                
+                    <label>Task Description</label>
+                      <textarea formControlName="description" rows="5" class="form-control"></textarea>
+                
                 </div>
-                <div class="row">
-                  <div class="col-sm-5">
-                      <textarea formControlName="description" rows="5"></textarea>
-                   </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-5">
-                      <label style="margin-right: 20px;">Priority </label>
-                      <div class="form-check form-check-inline" *ngFor="let priority of priorities">
-                          <label class="form-check-label"><input
-                                  class="form-check-input" type="radio"
-                                  name="priority"
+                
+                <div class="form-group">
+                
+                      <span style="margin-right: 20px;">Priority </span>
+                          <label class="btn btn-secondary" style="margin:5px" *ngFor="let priority of priorities"><input
+                                  class="form-control" type="radio" name="priority"
                                   formControlName="priority"
-                                  [value]="priority" /> {{priority}}</label>
-                      </div>
-                  </div>
+                                  [value]="priority" /> {{priority}}
+                                </label>
+                      
+                 
                 </div>
-                <div class="row">
-                  <div class="col-sm-5">
+
+                <div class="form-group">
+                 
                       <select id="status"
                       formControlName="status"
                       placeholder="Status"
@@ -51,21 +59,24 @@
                         {{taskStatus}}
                       </option>
                     </select>
-                  </div>
+                  
                 </div>
-                <div class="row">
-                  <div class="col-sm-5">
-                      <input type="text" formControlName="assignedTo">
-                  </div>
+
+                <div class="form-group">
+                 
+                      <input type="text" class="form-control" placeholder="Assigned To" formControlName="assignedTo">
+                
                 </div>
-                <div class="row">
-                  <div class="col-sm-5">
-                      <input type="date" formControlName="dueDate" />
-                  </div>
+
+                <div class="form-group">
+                 
+                    <label>Due Date</label>
+                      <input type="date" class="form-control" formControlName="dueDate" />
+                  
                 </div>       
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="submit" [disabled]="!this.addTaskForm.valid" class="btn btn-primary">Create</button>
         </div>
     </form>
@@ -175,5 +186,6 @@
 </div>
 <div class="col-sm-4" style="border:2px solid black; padding:5%;margin-right:0;">
    hii
+</div>
 </div>
 </div>

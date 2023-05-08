@@ -1,0 +1,11 @@
+<div class="container-fluid">
+  <div class="row" >
+    <button class="btn btn-success" (click)="getUsers()">Get Users</button>
+  </div>
+  
+  <li *ngFor="let user of users">
+      <span>{{user.name}} {{user.email}}</span>
+    </li>
+  <h3>No users Apparently</h3>
+</div>
+
